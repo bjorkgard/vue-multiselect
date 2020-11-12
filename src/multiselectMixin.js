@@ -67,7 +67,8 @@ export default {
       search: '',
       isOpen: false,
       preferredOpenDirection: 'below',
-      optimizedHeight: this.maxHeight
+      optimizedHeight: this.maxHeight,
+      overflowStates: []
     }
   },
   props: {
@@ -408,6 +409,59 @@ export default {
         : this.internalValue.length === 0
           ? null
           : this.internalValue[0]
+    },
+    isScrollable (element) {
+      return element.scrollHeight > element.clientHeight
+    },
+    /**
+     * append options to the body so no overflow or z-index issue occurs
+     */
+    appendOptionsToBody () {
+      let hideScrollLevel = 5 // remove overflow scroll and set it to overflow hidden up to 5 parents by default (useful for scrollable parents)
+      let optionsZIndex = 999
+      if (typeof this.appendToBody === 'object') {
+        if (this.appendToBody.value === false) {
+          return false
+        }
+        hideScrollLevel = this.appendToBody.hideScrollLevel || hideScrollLevel
+        optionsZIndex = this.appendToBody.optionsZIndex || optionsZIndex
+      }
+      const optionsRef = this.$refs.list
+      if (this.isOpen && optionsRef) {
+        const { top, left, width, height } = this.$el.getBoundingClientRect()
+        let scrollX = window.scrollX || window.pageXOffset
+        let scrollY = window.scrollY || window.pageYOffset
+        optionsRef.setAttribute(
+          'style',
+          `position:absolute;
+           width:${this.$el.offsetWidth || width}px;
+           left:${scrollX + left}px;
+           top:${scrollY + top + height}px;
+           z-index:${optionsZIndex}`
+        )
+        let tempIndex = Number(hideScrollLevel)
+
+        let parentNode = this.$el.parentNode
+        while (tempIndex) {
+          this.overflowStates[tempIndex] = parentNode.style.overflow
+          if (parentNode && this.isScrollable(parentNode)) {
+            parentNode.style.overflow = 'hidden'
+            parentNode.classList.add('drop-overflow')
+          }
+          parentNode = parentNode.parentNode
+          tempIndex -= 1
+        }
+        document.body.appendChild(optionsRef)
+      } else {
+        let parentNode = this.$el.parentNode
+        let tempIndex = Number(hideScrollLevel)
+        while (tempIndex) {
+          parentNode.style.overflow = this.overflowStates[tempIndex]
+          parentNode = parentNode.parentNode
+          parentNode.classList.remove('drop-overflow')
+          tempIndex -= 1
+        }
+      }
     },
     /**
      * Filters and then flattens the options list

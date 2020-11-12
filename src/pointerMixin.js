@@ -34,9 +34,10 @@ export default {
     },
     isOpen () {
       this.pointerDirty = false
+      if (this.appendToBody) this.appendOptionsToBody()
     },
     pointer () {
-      this.$refs.search.setAttribute('aria-activedescendant', this.id + '-' + this.pointer.toString())
+      if (this.searchable) this.$refs.search.setAttribute('aria-activedescendant', this.id + '-' + this.pointer.toString())
     }
   },
   methods: {

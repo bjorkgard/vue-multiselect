@@ -297,6 +297,16 @@ export default {
     tabindex: {
       type: Number,
       default: 0
+    },
+    /**
+    * Append the dropdown element to the end of the body
+    * and size/position it dynamically. Use it if you have
+    * overflow or z-index issues.
+    * @type {Boolean, Object}
+    */
+    appendToBody: {
+      type: [Boolean, Object],
+      default: false
     }
   },
   computed: {
