@@ -431,12 +431,13 @@ export default {
         const { top, left, width, height } = this.$el.getBoundingClientRect()
         let scrollX = window.scrollX || window.pageXOffset
         let scrollY = window.scrollY || window.pageYOffset
+        let topPosition = this.preferredOpenDirection === 'below' ? scrollY + top + height : scrollY
         optionsRef.setAttribute(
           'style',
           `position:absolute;
            width:${this.$el.offsetWidth || width}px;
            left:${scrollX + left}px;
-           top:${scrollY + top + height}px;
+           top:${topPosition}px;
            height:${this.optimizedHeight}px;
            max-height:${this.optimizedHeight}px;
            z-index:${optionsZIndex}`
