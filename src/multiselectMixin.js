@@ -432,6 +432,10 @@ export default {
         let scrollX = window.scrollX || window.pageXOffset
         let scrollY = window.scrollY || window.pageYOffset
 
+        console.log(scrollY)
+        console.log(top)
+        console.log(height)
+
         let topPosition = this.preferredOpenDirection === 'below' ? scrollY + top + height : scrollY + height
         optionsRef.setAttribute(
           'style',
