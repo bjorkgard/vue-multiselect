@@ -436,8 +436,9 @@ export default {
           `position:absolute;
            width:${this.$el.offsetWidth || width}px;
            left:${scrollX + left}px;
-           top:${scrollY + top + this.optimizedHeight}px;
+           top:${scrollY + top + height}px;
            height:${this.optimizedHeight}px;
+           max-height:${this.optimizedHeight}px;
            z-index:${optionsZIndex}`
         )
         let tempIndex = Number(hideScrollLevel)
