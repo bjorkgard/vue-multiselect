@@ -431,7 +431,7 @@ export default {
         const { top, left, width, height } = this.$el.getBoundingClientRect()
         let scrollX = window.scrollX || window.pageXOffset
         let scrollY = window.scrollY || window.pageYOffset
-        let topPosition = this.preferredOpenDirection === 'below' ? scrollY + top + height : scrollY
+        let topPosition = this.preferredOpenDirection === 'below' ? scrollY + top + height : top
         optionsRef.setAttribute(
           'style',
           `position:absolute;
