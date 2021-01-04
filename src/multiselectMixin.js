@@ -761,13 +761,14 @@ export default {
       const spaceAbove = this.$el.getBoundingClientRect().top
       const spaceBelow = window.innerHeight - this.$el.getBoundingClientRect().bottom
       const hasEnoughSpaceBelow = spaceBelow > this.maxHeight
+      const allOptionsHeight = this.options.length ? this.options.length * 40 : 40
 
       if (hasEnoughSpaceBelow || spaceBelow > spaceAbove || this.openDirection === 'below' || this.openDirection === 'bottom') {
         this.preferredOpenDirection = 'below'
-        this.optimizedHeight = Math.min(spaceBelow - 40, this.maxHeight)
+        this.optimizedHeight = Math.min(spaceBelow - 40, allOptionsHeight, this.maxHeight)
       } else {
         this.preferredOpenDirection = 'above'
-        this.optimizedHeight = Math.min(spaceAbove - 40, this.maxHeight)
+        this.optimizedHeight = Math.min(spaceAbove - 40, allOptionsHeight, this.maxHeight)
       }
     }
   }
