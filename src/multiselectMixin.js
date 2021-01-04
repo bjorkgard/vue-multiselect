@@ -449,7 +449,7 @@ export default {
         while (tempIndex) {
           this.overflowStates[tempIndex] = parentNode.style.overflow
           if (parentNode && this.isScrollable(parentNode)) {
-            parentNode.style.overflow = 'hidden'
+            // parentNode.style.overflow = 'hidden'
             parentNode.classList.add('drop-overflow')
           }
           parentNode = parentNode.parentNode
