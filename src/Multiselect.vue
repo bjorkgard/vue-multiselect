@@ -244,6 +244,15 @@ export default {
       default: 300
     },
     /**
+     * Sets maxHeight style value of the dropdown
+     * @default 300
+     * @type {Integer}
+     */
+    minHeight: {
+      type: Number,
+      default: 40
+    },
+    /**
      * Function that process the message shown when selected
      * elements pass the defined limit.
      * @default 'and * more'
