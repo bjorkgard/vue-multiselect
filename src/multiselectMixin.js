@@ -761,7 +761,23 @@ export default {
       const spaceAbove = this.$el.getBoundingClientRect().top
       const spaceBelow = window.innerHeight - this.$el.getBoundingClientRect().bottom
       const hasEnoughSpaceBelow = spaceBelow > this.maxHeight
-      let allOptionsHeight = this.options.length ? this.options.length * 40 : 40
+
+      let allOptionsHeight = 0
+      if (this.groupValues === '') {
+        allOptionsHeight += this.options.length ? this.options.length * 40 : 40
+      } else {
+        // we need to calculate allOptionsHeight with sub options
+        let groupptionLength = this.options.map(group => {
+          const groupOptions = group[this.groupValues]
+
+          console.log(groupOptions.length)
+          return groupOptions.length
+        })
+
+        console.log(groupptionLength)
+
+        allOptionsHeight += this.options.length ? (this.options.length + groupptionLength) * 40 : 40
+      }
 
       console.log('allOptionHeight: ' + allOptionsHeight)
       console.log('minHeight: ' + this.minHeight)
