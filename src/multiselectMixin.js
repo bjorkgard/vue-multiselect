@@ -762,8 +762,13 @@ export default {
       const spaceBelow = window.innerHeight - this.$el.getBoundingClientRect().bottom
       const hasEnoughSpaceBelow = spaceBelow > this.maxHeight
       let allOptionsHeight = this.options.length ? this.options.length * 40 : 40
+
+      console.log('allOptionHeight: ' + allOptionsHeight)
+      console.log('minHeight: ' + this.minHeight)
       // if minHeight is set then we need to check if this value is larger than allOptionsHeight
       allOptionsHeight = this.minHeight ? Math.max(allOptionsHeight, this.minHeight) : allOptionsHeight
+
+      console.log(allOptionsHeight)
 
       if (hasEnoughSpaceBelow || spaceBelow > spaceAbove || this.openDirection === 'below' || this.openDirection === 'bottom') {
         this.preferredOpenDirection = 'below'
