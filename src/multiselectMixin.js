@@ -761,9 +761,9 @@ export default {
       const spaceAbove = this.$el.getBoundingClientRect().top
       const spaceBelow = window.innerHeight - this.$el.getBoundingClientRect().bottom
       const hasEnoughSpaceBelow = spaceBelow > this.maxHeight
-      console.log(this.groupValues)
+
       let allOptionsHeight = 0
-      if (this.groupValues === '') {
+      if (!this.groupValues) {
         allOptionsHeight += this.options.length ? this.options.length * 40 : 40
       } else {
         // we need to calculate allOptionsHeight with sub options
