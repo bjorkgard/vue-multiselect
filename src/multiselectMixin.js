@@ -770,17 +770,12 @@ export default {
         let groupptionLength = this.options.map(group => {
           const groupOptions = group[this.groupValues]
 
-          console.log(groupOptions.length)
           return groupOptions.length
         })
-
-        console.log(groupptionLength)
 
         allOptionsHeight += this.options.length ? (this.options.length + groupptionLength.reduce((a, b) => a + b, 0)) * 40 : 40
       }
 
-      console.log('allOptionHeight: ' + allOptionsHeight)
-      console.log('minHeight: ' + this.minHeight)
       // if minHeight is set then we need to check if this value is larger than allOptionsHeight
       allOptionsHeight = this.minHeight ? Math.max(allOptionsHeight, this.minHeight) : allOptionsHeight
 
