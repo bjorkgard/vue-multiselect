@@ -776,7 +776,7 @@ export default {
 
         console.log(groupptionLength)
 
-        allOptionsHeight += this.options.length ? (this.options.length + groupptionLength) * 40 : 40
+        allOptionsHeight += this.options.length ? (this.options.length + groupptionLength.reduce((a, b) => a + b, 0)) * 40 : 40
       }
 
       console.log('allOptionHeight: ' + allOptionsHeight)
